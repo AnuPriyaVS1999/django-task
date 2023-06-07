@@ -113,22 +113,16 @@ br.clear {
   --main-bg-color: #23D3D3;
   --main-heading-color:#1C2C40;
 } */
-/* *{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-} */
-/* .wrapper{
-    width: 420px; 
-    background: #fff;
-    border-radius: 7px;
-    padding: 20px 28px 45px;
-	margin: 0 auto;
 }
-.wrapper header{
-	text-align: center;
-	font-size: 20px;
-	font-weight: 900;
+body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	background: #4d59fb;
+
 } */
-
-
