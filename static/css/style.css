@@ -177,10 +177,7 @@ ul li{
 	justify-content: space-between;
 	border-bottom: 1px solid #ccc ;
 }
-/* ul li .details p{
-	font-size: 22px;
-	font-weight: 500;
-} */
+
 .content li .details{
 	padding-left: 10px;
 	border-radius: 4px 0;
