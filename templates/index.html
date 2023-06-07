@@ -12,46 +12,48 @@
 
 <body>
     <div class="wrapper">
-        <header>English Dictionary</header>
-        <div class="search">
-            <input type="text" placeholder="Search a word">
-            
-            <img src="{% static './images/Property 1=serach.svg' %}" />
-            <img src="{% static './images/close.svg' %}" />
-            
-        </div>
-        <ul>
-            <li class="word">
-                <div class="details">
-                    <p>happy</p>
-            </li>
-            <div class="content">
-                <li class="meaning">
-                    <div class="details">
-                        <p>Meaning</p>
-                        <span>feeling or showing pleasure or content</span>
-                    </div>
-                </li>
-                <li class="example">
-                    <div class="details">
-                        <p>Example</p>
-                        <span>feeling or showing pleasure or content</span>
-                    </div>
-                </li>
-                <li class="synonyms">
-                    <div class="details">
-                        <p>Synonyms</p>
-                        <div class="list">
-                            <span>glag</span>
-                            <span>contented</span>
-                            <span>delighted</span>
-                            <span>cheerful</span>
-                            <span>joyful</span>
+        <div class="searchBox">
+            <header>English Dictionary</header>
+           
+    
+            <form action="" method="get">
+                    <img src="{% static './images/Property 1=serach.svg' %}" />
+                  
+                    <input type="text" name="search" placeholder="Search a Word" >                 
+            </form>
+    
+                   
+            <ul> 
+                <div class="content">
+                    <li class="meaning">
+                        <div class="details">
+                            <p>Meaning</p>
+                            <span>feeling or showing pleasure or content</span>
                         </div>
-                    </div>
-                </li>
-            </div>
-        </ul>
+                    </li>
+                    <li class="example">
+                        <div class="details">
+                            <p>Example</p>
+                            <span>feeling or showing pleasure or content</span>
+                        </div>
+                    </li>
+                    <li class="synonyms">
+                        <div class="details">
+                            <p>Synonyms</p>
+                            <div class="list">
+                                <span>Glag ,</span>
+                                <span>Contented ,</span>
+                                <span>Delighted ,</span>
+                                <span>Cheerful ,</span>
+                                <span>Joyful </span>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+            </ul>
+        </div>
     </div>
+
+   
 </body>
 </html>
