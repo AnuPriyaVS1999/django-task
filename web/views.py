@@ -21,7 +21,7 @@ def index(request):
                 "word": search_word,
                 "show": True,
             }
-            return render(request, 'web.index.html', context)
+            return render(request, 'web/index.html', context)
 
         elif search_word == '':
             error_msg="Empty Search"
@@ -31,7 +31,7 @@ def index(request):
                 "show": True,
                 "error_msg": error_msg,
             }
-            return render(request, 'index.html', context)
+            return render(request, 'web/index.html', context)
             
         else:
             error_msg = error.format(search_word)
@@ -43,7 +43,7 @@ def index(request):
                 "show": True,
                 "error_msg": error_msg,
             }
-            return render(request, 'index.html', context)
+            return render(request, 'web/index.html', context)
 
 
     else:
@@ -54,7 +54,7 @@ def index(request):
             "show": False,
 
         }
-        return render(request, 'index.html', context)
+        return render(request, 'web/index.html', context)
 
 
 def create_word(request):
@@ -76,5 +76,5 @@ def create_word(request):
     context = {
         "title": "Adding word to dictionary"
     }
-    return render(request, "addword.html", context)
+    return render(request, "web/createword.html", context)
 

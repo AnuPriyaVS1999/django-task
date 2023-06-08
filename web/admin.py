@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from web.models import Word,Meaning
+from web.models import Word,WordMeaning
 
 
 class AdminWord(admin.ModelAdmin):
@@ -8,7 +8,7 @@ class AdminWord(admin.ModelAdmin):
 
 admin.site.register(Word)
 
-class AdminMeaning(admin.ModelAdmin):
-    list_display = ["word","meaning","example","synonyms"]
+class AdminWordMeaning(admin.ModelAdmin):
+    list_display = ["word","meaning"]
 
-admin.site.register(Meaning,AdminMeaning)
+admin.site.register(WordMeaning,AdminWordMeaning)
