@@ -1,3 +1,28 @@
+import uuid
 from django.db import models
 
-# Create your models here.
+
+class Word(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+    word = models.CharField(max_length=100)
+
+    def _str_(self):
+        return str(self.word)
+
+
+class WordMeaning(models.Model):
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False,
+    )
+    word = models.ForeignKey("web.Word", on_delete=models.CASCADE)
+    meaning = models.TextField(max_length=255)
+    priority = models.IntegerField(null=True)
+
+    def _str_(self):
+        return str(self.word)

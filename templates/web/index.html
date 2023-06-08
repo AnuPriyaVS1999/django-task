@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dictionary App</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="searchBox">
+            <header>English Dictionary</header>
+            <div class="heading">
+                <a class="button" href="{% url 'web:create_word' %}">Add Word</a>
+            </div>
+           
+    
+            <form action="" method="post">
+                {% csrf_token %}
+                    <img src="{% static './images/Property 1=serach.svg' %}" />
+                  
+                    <input type="text" name="search" placeholder="Search a Word" >   
+                    <button type="submit" class="submit-btn"></button>              
+            </form>
+    
+                   
+         <ul class="result"> 
+            {% if show %}
+                <h2>{{word}}</h2>
+                {% if error_msg %}
+                   <p class="error">{{error_msg}}</p>
+                {% endif %}
+                {% for meaning in meanings %}
+                <li>
+                    {{meaning.meaning}}
+                </li>
+                {% endfor %}
+            {% else %}
+             <li>
+                <h2>Search a Word</h2>
+             </li>
+            {% endif %}
+            </ul>
+        </div>
+    </div>
+
+   
+</body>
+</html>

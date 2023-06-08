@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dictionary App</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
@@ -14,48 +14,43 @@
     <div class="wrapper">
         <div class="searchBox">
             <header>English Dictionary</header>
-            <div class="heading">
-                <a class="button" href="">Add Word</a>
-            </div>
-           
-    
-            <form action="" method="post">
+            
+            <form action="{% url 'web:create_word' %}" method="post">
                 {% csrf_token %}
-                    <img src="{% static './images/Property 1=serach.svg' %}" />
-                  
-                    <input type="text" name="search" placeholder="Search a Word" >   
-                                  
-            </form>
-    
-                   
-            <ul> 
-                <div class="content">
+                <ul> 
+                    <div class="content">
+                    <li class="word">
+                        <div class="details">
+                            <p>word :-</p>
+                            <input class="word" type="text" name="word" />
+                        </div>
+                    </li>
+                                    
+                
                     <li class="meaning">
                         <div class="details">
                             <p>Meaning</p>
-                            <span>feeling or showing pleasure or content</span>
+                            <textarea name="word_meaning" id="word_meaning"></textarea>
                         </div>
                     </li>
                     <li class="example">
                         <div class="details">
                             <p>Example</p>
-                            <span>feeling or showing pleasure or content</span>
+                            <textarea name="word_meaning" id="word_example"></textarea>
                         </div>
                     </li>
                     <li class="synonyms">
                         <div class="details">
                             <p>Synonyms</p>
                             <div class="list">
-                                <span>Glag ,</span>
-                                <span>Contented ,</span>
-                                <span>Delighted ,</span>
-                                <span>Cheerful ,</span>
-                                <span>Joyful </span>
+                                <textarea name="word_meaning" id="word_synonyms"></textarea>
+                               
                             </div>
                         </div>
                     </li>
                 </div>
             </ul>
+        </form>
         </div>
     </div>
 
