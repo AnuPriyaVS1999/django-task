@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{{title}}</title>
+        <link rel="stylesheet" href="{% static './css/add.css' %}" />
+    </head>
+    <body>
+        <section class="container">
+            <form action="{% url 'web:create_word' %}" method="post" >
+                {% csrf_token %}
+                <div class="form-field">
+                    <label for="word">Word :-</label>
+                    <input id='word' type="text" name="word" />
+                </div>
+                <div class="form-field">
+                    <label for="word_meaning">Word meaning :-</label>
+                    <textarea name="word_meaning" id="word_meaning" cols="30" rows="10"></textarea>
+                </div>
+                <div class="form-field">
+                    <label for="Priority">Priority :-</label>
+                    <select name="priority" id="Priority">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+                <div class="form-field btn">
+                    <input type="submit" value="Add word" />
+                    <div><a href="{% url 'web:index' %}">Go Back</a></div>
+                </div>

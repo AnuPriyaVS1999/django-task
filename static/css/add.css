@@ -1,0 +1,61 @@
+@font-face {
+    font-family: 'gorditaregular';
+    src: url('../fonts/gordita_regular-webfont.woff2') format('woff2'),
+         url('../fonts/gordita_regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}* {
+    margin: 0%;
+    padding: 0%;
+    font-family: 'gorditaregular';
+}
+
+section.container {
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 100px ;
+}
+section.container form {
+    display: flex;
+    flex-direction: column;
+}
+section.container form div.form-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+section.container form div.form-field.btn {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+section.container form div.form-field.btn a {
+    display: block;
+    width: 200px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #000;
+    font-weight: 900;
+}
+section.container form div.form-field label {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+section.container form div.form-field textarea,
+section.container form div.form-field input {
+    padding: 10px;
+    width: 70%;
+    font-size: 18px;
+    border-radius: 6px;
+}
+section.container form div.form-field input[type="submit"] {
+    width: 200px;
+    font-size: 20px;
+    display: inline;
+}
+section.container form div.form-field select {
+    width: 200px;
+    padding: 10px;
+}
+section.container form div.form-field select option {}

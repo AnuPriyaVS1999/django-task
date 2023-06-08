@@ -76,5 +76,5 @@ def create_word(request):
     context = {
         "title": "Adding word to dictionary"
     }
-    return render(request, "web/createword.html", context)
+    return render(request, "web/addword.html", context)
 
