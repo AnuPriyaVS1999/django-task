@@ -10,8 +10,7 @@
     </head>
     <body>
         <section class="container">
-            <form action="{% url 'web:create_word' %}" method="post" >
-                {% csrf_token %}
+            <form action="" method="" >
                 <div class="form-field">
                     <label for="word">Word :-</label>
                     <input id='word' type="text" name="word" />
@@ -28,8 +27,10 @@
                         <option value="3">3</option>
                     </select>
                 </div>
-                <div class="form-field btn">
-                    <input type="submit" value="Add word" />
-                    <div><a href="{% url 'web:index' %}">Go Back</a></div>
-                    
-                </div>
+                    <div class="form-field btn">
+                        <a href="{% url 'web:index' %}">Add</a>
+        
+                         
+                    </div>
+        
+                

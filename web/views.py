@@ -6,15 +6,12 @@ from web.models import Word, WordMeaning
 def index(request):
     if request.method == 'POST':
         search_word = request.POST.get('search_word')
-
         word = Word.objects.filter(word=search_word)
         error_msg = False
         error = "The word '{}' is not found"
 
         if word:
-            word_meaning = WordMeaning.objects.filter(
-                word__in=word
-            ).order_by('priority')
+            word_meaning = WordMeaning.objects.filter(word__in=word).order_by('priority')
             context = {
                 "title": "Dictionary",
                 "meanings": word_meaning,
@@ -45,14 +42,12 @@ def index(request):
             }
             return render(request, 'web/index.html', context)
 
-
     else:
         context = {
             "title": "Dictionary",
             "searchword": "",
             "word": "",
             "show": False,
-
         }
         return render(request, 'web/index.html', context)
 
@@ -78,3 +73,12 @@ def create_word(request):
     }
     return render(request, "web/addword.html", context)
 
+
+
+
+
+def edit_word(request):
+    context = {
+        "title": "Adding word to dictionary"
+    }
+    return render(request, "web/edit.html", context=context)
