@@ -9,7 +9,7 @@ class Word(models.Model):
         editable=False,
     )
     word = models.CharField(max_length=100)
-
+    is_edit = models.BooleanField(default=False)
     def _str_(self):
         return str(self.word)
 

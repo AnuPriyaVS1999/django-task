@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404,redirect
 
 from web.models import Word, WordMeaning
 
@@ -77,8 +77,22 @@ def create_word(request):
 
 
 
-def edit_word(request):
+def edit_word(request,id):
+    word_list = Word.objects.filter(is_delete=False, is_edit=False)
+    edit_list = Word.objects.filter(is_edit=False,is_delete=False)
+    instance = get_object_or_404(Word,id=id)
+    if request.method == 'POST':
+        edited_text = request.POST.get("edited-text")
+        instance = Word.objects.get(id=id)
+        if edited_text :
+            instance.title = edited_text
+            instance.save()
+
+        return redirect("web:index.html")
     context = {
-        "title": "Adding word to dictionary"
+        "title": "",
+        "word_list": word_list,
+        "edit_list": edit_list,
+        'word_text':instance
     }
     return render(request, "web/edit.html", context=context)
