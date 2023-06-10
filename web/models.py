@@ -23,6 +23,8 @@ class WordMeaning(models.Model):
     )
     word = models.ForeignKey("web.Word", on_delete=models.CASCADE)
     meaning = models.TextField()
+    examples = models.TextField()
+    synonyms = models.TextField()
     priority = models.IntegerField(null=True)
    
 

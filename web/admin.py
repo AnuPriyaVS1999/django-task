@@ -9,6 +9,9 @@ class AdminWord(admin.ModelAdmin):
 admin.site.register(Word,AdminWord)
 
 class AdminWordMeaning(admin.ModelAdmin):
-    list_display = [ "word","meaning",]
+    list_display = ( "get_wordname","meaning",'synonyms', 'examples')
+
+    def get_wordname(self, instance):
+        return instance.word.word
 
 admin.site.register(WordMeaning,AdminWordMeaning)
