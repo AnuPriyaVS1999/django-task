@@ -1,27 +1,14 @@
-from django.shortcuts import render,get_object_or_404,redirect
-
+from django.shortcuts import render, get_object_or_404, redirect
 from web.models import Word, WordMeaning
-
 
 def index(request):
     if request.method == 'POST':
         search_word = request.POST.get('search_word')
-        word = Word.objects.filter(word=search_word)
         error_msg = False
         error = "The word '{}' is not found"
-
-        if word:
-            word_meaning = WordMeaning.objects.filter(word__in=word).order_by('priority')
-            context = {
-                "title": "Dictionary",
-                "meanings": word_meaning,
-                "word": search_word,
-                "show": True,
-            }
-            return render(request, 'web/index.html', context)
-
-        elif search_word == '':
-            error_msg="Empty Search"
+        
+        if search_word == '':
+            error_msg = "Empty Search"
             context = {
                 "title": "Dictionary",
                 "word": search_word,
@@ -30,26 +17,35 @@ def index(request):
             }
             return render(request, 'web/index.html', context)
             
-        else:
-            error_msg = error.format(search_word)
-            word_meaning = ""
-
+        word = Word.objects.filter(word=search_word)
+        if word:
+            word_meaning = WordMeaning.objects.filter(word__in=word).order_by('priority')
+            word=Word.objects.filter(word=search_word)
             context = {
                 "title": "Dictionary",
+                "meanings": word_meaning,
                 "word": search_word,
                 "show": True,
-                "error_msg": error_msg,
+                "words":word
             }
             return render(request, 'web/index.html', context)
-
-    else:
+        
+        error_msg = error.format(search_word)
         context = {
             "title": "Dictionary",
-            "searchword": "",
-            "word": "",
-            "show": False,
+            "word": search_word,
+            "show": True,
+            "error_msg": error_msg,
         }
         return render(request, 'web/index.html', context)
+    
+    context = {
+        "title": "Dictionary",
+        "searchword": "",
+        "word": "",
+        "show": False,
+    }
+    return render(request, 'web/index.html', context)
 
 
 def create_word(request):
@@ -61,7 +57,7 @@ def create_word(request):
         new_word, created = Word.objects.get_or_create(
             word=word
         )
-        if new_word:
+        if created:
             WordMeaning.objects.create(
                 word=new_word,
                 meaning=meaning,
@@ -74,25 +70,31 @@ def create_word(request):
     return render(request, "web/addword.html", context)
 
 
+def edit_word(request, id):
+    word_instance = Word.objects.get(id=id)
+    word_meaning_instance = WordMeaning.objects.filter(word=word_instance)
 
+    
+    
+    if request.method == "POST":
+        word = request.POST.get("edited-word")
+        meaning = request.POST.get("edited-meaning")
+        print(meaning)
+        
+        
+        if word:
+            word_instance.word = word
+        for meaning in word_meaning_instance:
+            meaning.meaning=meaning
+            meaning.save()
+        word_instance.save()
 
+        return redirect('word_detail', id=id)  # Assuming you have a word_detail view
 
-def edit_word(request,id):
-    word_list = Word.objects.filter(is_delete=False, is_edit=False)
-    edit_list = Word.objects.filter(is_edit=False,is_delete=False)
-    instance = get_object_or_404(Word,id=id)
-    if request.method == 'POST':
-        edited_text = request.POST.get("edited-text")
-        instance = Word.objects.get(id=id)
-        if edited_text :
-            instance.title = edited_text
-            instance.save()
-
-        return redirect("web:index.html")
     context = {
-        "title": "",
-        "word_list": word_list,
-        "edit_list": edit_list,
-        'word_text':instance
+        "title": "Edit Page",
+        "word_meaning_instance": word_meaning_instance,
+        "word_instance": word_instance,
+        "word_id": id
     }
-    return render(request, "web/edit.html", context=context)
+    return render(request, "web/edit.html", context)

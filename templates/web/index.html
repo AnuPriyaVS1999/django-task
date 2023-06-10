@@ -10,15 +10,20 @@
     </head>
     <body>
         <section class="container">
+            
             <div class="heading">
                 <h3>English Dictionary</h3>
                 <a class="button" href="{% url 'web:create_word' %}">Add Word</a>
-                <div><a href="{% url 'web:edit_word' id=instance.id %}" class="edit_word" method="POST">Edit</a></div>
-                {% csrf_token %}
-                <div><a href="{% url 'web:index' %}">Delete</a></div>
+                {% if meanings %}
+                  {% for word in words %}
+                   
+                <div>
+                    <a href="{% url 'web:edit_word' id=word.id %}" class="edit_word">Edit</a>
+                </div>
+                {% endfor %}
+                  
+                {% endif %}
             </div>
-
-            {% for instance in word_list %}
             <form action="" method="post">
                 {% csrf_token %}
                 <div class="form-field">
@@ -28,7 +33,6 @@
                     </button>
                 </div>
             </form>
-            {% endfor %}
             <ul class="result" >
                 {% if show %}
                     <h2>{{word}}</h2>
@@ -46,6 +50,7 @@
                     </li>
                 {% endif %}
             </ul>
+
         </section>
         
     </body>

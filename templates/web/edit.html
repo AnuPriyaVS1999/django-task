@@ -10,14 +10,19 @@
     </head>
     <body>
         <section class="container">
-            <form action="" method="" >
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="form-field">
                     <label for="word">Word :-</label>
-                    <input id='word' type="text" name="edited-text" value="{{word_text}}"/>
+                    <input id='word' type="text" name="edited-text" value="{{word_instance.word}}"/>
                 </div>
                 <div class="form-field">
                     <label for="word_meaning">Word meaning :-</label>
-                    <textarea name="word_meaning" id="word_meaning" cols="30" rows="10"></textarea>
+                    {% for meaning in word_meaning_instance %}
+                    <input id="word_meaning"  type="text" name="word_meaning" value="{{meaning.meaning}}"/>
+                           
+                        {% endfor %}
+                    
                 </div>
                 <div class="form-field">
                     <label for="Priority">Priority :-</label>
@@ -28,9 +33,8 @@
                     </select>
                 </div>
                     <div class="form-field btn">
-                        <a href="{% url 'web:index' %}">Add</a>
-        
-                         
+                        <button type="submit">edit</button>
+                        <a href="{% url 'web:index' %}">Go Back</a>
                     </div>
-        
-                
+            </form>
+        </section>

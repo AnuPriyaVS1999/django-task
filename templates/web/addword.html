@@ -13,11 +13,11 @@
             <form action="{% url 'web:create_word' %}" method="post" >
                 {% csrf_token %}
                 <div class="form-field">
-                    <label for="word">Word :-</label>
+                    <label for="word">Enter a word :-</label>
                     <input id='word' type="text" name="word" />
                 </div>
                 <div class="form-field">
-                    <label for="word_meaning">Word meaning :-</label>
+                    <label for="word_meaning">Meaning :-</label>
                     <textarea name="word_meaning" id="word_meaning" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-field">
