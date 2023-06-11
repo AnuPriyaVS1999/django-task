@@ -53,6 +53,8 @@ def create_word(request):
         word = request.POST.get('word')
         meaning = request.POST.get('word_meaning')
         priority = request.POST.get('priority')
+        synonyms = request.POST.get('word_synonyms')
+        examples = request.POST.get('word_examples')
 
         new_word, created = Word.objects.get_or_create(
             word=word
@@ -61,8 +63,11 @@ def create_word(request):
             WordMeaning.objects.create(
                 word=new_word,
                 meaning=meaning,
+                synonyms=synonyms,
+                examples=examples,
                 priority=priority,
             )
+            redirect('/')
 
     context = {
         "title": "Adding word to dictionary"
@@ -70,31 +75,39 @@ def create_word(request):
     return render(request, "web/addword.html", context)
 
 
-def edit_word(request, id):
-    word_instance = Word.objects.get(id=id)
-    word_meaning_instance = WordMeaning.objects.filter(word=word_instance)
+def edit_word(request, pk):
+    word_instance = Word.objects.get(id=pk)
+    if word_instance:
+        if WordMeaning.objects.filter(word=word_instance).exists():
+            word_meaning_instance = WordMeaning.objects.get(word=word_instance)
 
     
     
     if request.method == "POST":
-        word = request.POST.get("edited-word")
-        meaning = request.POST.get("edited-meaning")
+        word = request.POST.get("edited-text")
+        meaning = request.POST.get("edited-word-meaning")
+        priority = request.POST.get('priority')
+        synonyms = request.POST.get('edited-word-synonyms')
+        examples = request.POST.get('edited-word-examples')
         print(meaning)
+        print(word)
         
         
         if word:
             word_instance.word = word
-        for meaning in word_meaning_instance:
-            meaning.meaning=meaning
-            meaning.save()
-        word_instance.save()
+            word_meaning_instance.meaning=meaning
+            word_meaning_instance.priority=priority
+            word_meaning_instance.synonyms=synonyms
+            word_meaning_instance.examples=examples
+            word_meaning_instance.save()
+         
 
-        return redirect('word_detail', id=id)  # Assuming you have a word_detail view
+        return redirect('/')  # Assuming you have a word_detail view
 
     context = {
         "title": "Edit Page",
         "word_meaning_instance": word_meaning_instance,
         "word_instance": word_instance,
-        "word_id": id
+        "word_id": pk
     }
     return render(request, "web/edit.html", context)

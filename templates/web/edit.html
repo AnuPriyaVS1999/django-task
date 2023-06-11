@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="{% static './css/add.css' %}" />
     </head>
     <body>
+        
         <section class="container">
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
@@ -18,11 +19,15 @@
                 </div>
                 <div class="form-field">
                     <label for="word_meaning">Word meaning :-</label>
-                    {% for meaning in word_meaning_instance %}
-                    <input id="word_meaning"  type="text" name="word_meaning" value="{{meaning.meaning}}"/>
-                           
-                        {% endfor %}
-                    
+                    <input id="word_meaning"  type="text" name="edited-word-meaning" value="{{word_meaning_instance.meaning}}"/>
+                </div>
+                <div class="form-field">
+                    <label for="word_synonyms">Word Synonyms :-</label>
+                    <input id="word_synonyms"  type="text" name="edited-word-synonyms" value="{{word_meaning_instance.synonyms}}"/>
+                </div>
+                <div class="form-field">
+                    <label for="word_examples">Word examples :-</label>
+                    <input id="word_examples"  type="text" name="edited-word-examples" value="{{word_meaning_instance.examples}}"/>
                 </div>
                 <div class="form-field">
                     <label for="Priority">Priority :-</label>
@@ -33,8 +38,11 @@
                     </select>
                 </div>
                     <div class="form-field btn">
-                        <button type="submit">edit</button>
+                        <button class="edit">Edit</button>
                         <a href="{% url 'web:index' %}">Go Back</a>
                     </div>
             </form>
         </section>
+    
+    </body>
+    </html>

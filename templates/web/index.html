@@ -18,7 +18,7 @@
                   {% for word in words %}
                    
                 <div>
-                    <a href="{% url 'web:edit_word' id=word.id %}" class="edit_word">Edit</a>
+                    <a href="{% url 'web:edit_word' pk=word.id %}" class="edit_word">Edit</a>
                 </div>
                 {% endfor %}
                   
@@ -39,9 +39,22 @@
                     {% if error_msg %}
                         <p class="error">{{error_msg}}</p>
                     {% endif %}
+                    <h4>Meaning</h4>
                     {% for meaning in meanings %}
                         <li>
                             {{meaning.meaning}}
+                        </li>
+                    {% endfor %}
+                    <h4>Synonyms</h4>
+                    {% for meaning in meanings %}
+                        <li>
+                            {{meaning.synonyms}}
+                        </li>
+                    {% endfor %}
+                    <h4>Examples</h4>
+                    {% for meaning in meanings %}
+                        <li>
+                            {{meaning.examples}}
                         </li>
                     {% endfor %}
                 {% else %}
